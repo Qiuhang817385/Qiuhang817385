@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="icon" href="/img/avatar.jpg">
+<link rel="icon" href="/img/38211706.jpg">
 
 <link href="/css/style.css?v=1.0.1" rel="stylesheet">
 
@@ -54,7 +54,7 @@
 <aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
-    <img class="avatar" src="/img/avatar.jpg" />
+    <img class="avatar" src="/img/38211706.jpg" />
 </a>
 <div class="author">
     <span>John Doe</span>
@@ -161,7 +161,7 @@
         
     
         
-        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+        <a title="email" href="mailto:826266129@qq.com" target="_blank">
             
                 <svg class="iconfont-svg" aria-hidden="true">
                     <use xlink:href="#icon-email"></use>
@@ -171,7 +171,7 @@
         
     
         
-        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=826266129&site=qq&menu=yes" target="_blank">
             
                 <svg class="iconfont-svg" aria-hidden="true">
                     <use xlink:href="#icon-qq"></use>
@@ -263,19 +263,19 @@
     <nav id="title-list-nav">
         
         <a  class=""
-           href="/2019/12/14/hello-world/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Hello World">Hello World</span>
-            <span class="post-date" title="2019-12-14 16:37:26">2019/12/14</span>
-        </a>
-        
-        <a  class=""
            href="/2019/12/15/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/"
            data-tag="newTitle"
            data-author="" >
             <span class="post-title" title="文章标题">文章标题</span>
             <span class="post-date" title="2019-12-15 01:46:09">2019/12/15</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/12/14/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2019-12-14 16:37:26">2019/12/14</span>
         </a>
         
     </nav>
@@ -353,10 +353,6 @@
 </article>
 
 
-<p>
-    <a  class="dashang" onclick="dashangToggle()">赏</a>
-</p>
-
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>文章标题</p>
@@ -399,24 +395,6 @@
 </div>
 <div class="acParent"></div>
 
-<div class="hide_box" onclick="dashangToggle()"></div>
-<div class="shang_box">
-    <a class="shang_close"  onclick="dashangToggle()">×</a>
-    <div class="shang_tit">
-        <p>喜欢就点赞,疼爱就打赏</p>
-    </div>
-    <div class="shang_payimg">
-        <div class="pay_img">
-            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
-            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
-        </div>
-    </div>
-    <div class="shang_payselect">
-        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
-    </div>
-</div>
-
-
 </body>
 <script src="/js/jquery.pjax.js?v=1.0.1" ></script>
 
@@ -438,14 +416,6 @@
         
 
         /*渲染打赏样式*/
-        
-        $("input[name=pay]").on("click", function () {
-            if($("input[name=pay]:checked").val()=="weixin"){
-                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
-            } else {
-                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
-            }
-        })
         
 
         /*高亮代码块行号*/
@@ -478,11 +448,6 @@
     }
 
     /*打赏页面隐藏与展示*/
-    
-    function dashangToggle() {
-        $(".shang_box").fadeToggle();
-        $(".hide_box").fadeToggle();
-    }
     
 
 </script>
