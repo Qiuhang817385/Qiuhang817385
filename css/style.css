@@ -803,7 +803,7 @@ div.ac > ul > li:before,
   display: block;
 }
 .nav-right {
-  width: 320px;
+  width: 420px;
   height: 100%;
   background: rgba(250,250,250,0.95);
   border-right: 1px solid #e5e8ec;
@@ -1706,14 +1706,14 @@ h1 {
   font-size: 1.8em;
 }
 .nav {
-  width: 442px;
+  width: 542px;
   height: 100%;
   float: left;
   background-color: #fff;
   transition: margin-left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
 .nav.fullscreen {
-  margin-left: -442px;
+  margin-left: -542px;
 }
 .nav:hover .semicircle {
   margin-left: 0;
