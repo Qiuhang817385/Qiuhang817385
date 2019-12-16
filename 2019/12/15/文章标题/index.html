@@ -263,19 +263,19 @@
     <nav id="title-list-nav">
         
         <a  class=""
-           href="/2019/12/15/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/"
-           data-tag="newTitle"
-           data-author="" >
-            <span class="post-title" title="文章标题">文章标题</span>
-            <span class="post-date" title="2019-12-15 01:46:09">2019/12/15</span>
-        </a>
-        
-        <a  class=""
            href="/2019/12/14/hello-world/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="Hello World">Hello World</span>
             <span class="post-date" title="2019-12-14 16:37:26">2019/12/14</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/12/15/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/"
+           data-tag="newTitle"
+           data-author="" >
+            <span class="post-title" title="文章标题">文章标题</span>
+            <span class="post-date" title="2019-12-15 01:46:09">2019/12/15</span>
         </a>
         
     </nav>
@@ -404,7 +404,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#newTitle',],
+            'data': ['@阿杰','@小马哥','#newTitle',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
