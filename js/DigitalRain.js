@@ -8,7 +8,8 @@ Vars
 // var c = document.getElementById("canvas");
 var c = document.createElement( 'canvas' ),
 ctx = c.getContext( '2d' ),
-w = c.width = 1500,
+ s = window.screen,
+w = c.width =  s.width,
 h = c.height = 900,
 particles = [],
 particleCount = 3000,
@@ -24,6 +25,7 @@ lineCap = 'round',
 PI = Math.PI,
 TWO_PI = PI * 2;
 
+document.getElementsByTagName("body")[0].appendChild(c);
 /*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
 
 Utility
