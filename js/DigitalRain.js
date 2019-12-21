@@ -24,8 +24,6 @@ lineWidth = 1,
 lineCap = 'round',
 PI = Math.PI,
 TWO_PI = PI * 2;
-
-document.getElementsByTagName("body")[0].appendChild(c);
 /*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
 
 Utility
