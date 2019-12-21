@@ -5,10 +5,11 @@ Vars
 
 =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
 
+// var c = document.getElementById("canvas");
 var c = document.createElement( 'canvas' ),
 ctx = c.getContext( '2d' ),
 w = c.width = 1500,
-h = c.height = 700,
+h = c.height = 900,
 particles = [],
 particleCount = 3000,
 particlePath = 4,
