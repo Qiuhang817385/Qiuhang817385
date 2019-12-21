@@ -1,57 +1,241 @@
 window.onload = function(){
-    //获取画布对象
-    var canvas = document.getElementById("canvas");
-    //获取画布的上下文
-    var context =canvas.getContext("2d");
-    var s = window.screen;
-    var W = canvas.width = s.width;
-    var H = canvas.height;
-    //获取浏览器屏幕的宽度和高度
-    //var W = window.innerWidth;
-    //var H = window.innerHeight;
-    //设置canvas的宽度和高度
-    canvas.width = W;
-    canvas.height = H;
-    //每个文字的字体大小
-    var fontSize = 12;
-    //计算列
-    var colunms = Math.floor(W /fontSize);	
-    //记录每列文字的y轴坐标
-    var drops = [];
-    //给每一个文字初始化一个起始点的位置
-    for(var i=0;i<colunms;i++){
-        drops.push(0);
-    }
-    //运动的文字
-    var str ="WELCOME TO WWW.ITRHX.COM";
-    //4:fillText(str,x,y);原理就是去更改y的坐标位置
-    //绘画的函数
-    function draw(){
-        context.fillStyle = "rgba(238,238,238,.08)";//遮盖层
-        context.fillRect(0,0,W,H);
-        //给字体设置样式
-        context.font = "600 "+fontSize+"px  Georgia";
-        //给字体添加颜色
-        context.fillStyle = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900", "#FFBB33", "#FF8800", "#FF4444", "#CC0000"][parseInt(Math.random() * 10)];//randColor();可以rgb,hsl, 标准色，十六进制颜色
-        //写入画布中
-        for(var i=0;i<colunms;i++){
-            var index = Math.floor(Math.random() * str.length);
-            var x = i*fontSize;
-            var y = drops[i] *fontSize;
-            context.fillText(str[index],x,y);
-            //如果要改变时间，肯定就是改变每次他的起点
-            if(y >= canvas.height && Math.random() > 0.99){
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    };
-    function randColor(){//随机颜色
-        var r = Math.floor(Math.random() * 256);
-        var g = Math.floor(Math.random() * 256);
-        var b = Math.floor(Math.random() * 256);
-        return "rgb("+r+","+g+","+b+")";
-    }
-    draw();
-    setInterval(draw,35);
+    /*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Vars
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+var c = document.createElement( 'canvas' ),
+ctx = c.getContext( '2d' ),
+w = c.width = 1500,
+h = c.height = 700,
+particles = [],
+particleCount = 3000,
+particlePath = 4,
+pillars = [],
+pillarCount = 110,
+hue = 0,
+hueRange = 60,
+hueChange = 1,
+gravity = 0.1,
+lineWidth = 1,
+lineCap = 'round',
+PI = Math.PI,
+TWO_PI = PI * 2;
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Utility
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function rand( min, max ) {
+return Math.random() * ( max - min ) + min;
+}
+
+function distance( a, b ) {
+var dx = a.x - b.x,
+  dy = a.y - b.y;
+return Math.sqrt( dx * dx + dy * dy );
+}
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Particle
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function Particle( opt ) {
+this.path = [];
+this.reset();
+}
+
+Particle.prototype.reset = function() {
+this.radius = 1;
+this.x = rand( 0, w );
+this.y = 0;
+this.vx = 0;
+this.vy = 0;
+this.hit = 0;
+this.path.length = 0;
+};
+
+Particle.prototype.step = function() {
+this.hit = 0;
+
+this.path.unshift( [ this.x, this.y ] );
+if( this.path.length > particlePath ) {
+this.path.pop();
+}
+
+this.vy += gravity;
+  
+this.x += this.vx;
+this.y += this.vy;
+
+if( this.y > h + 10 ) {
+this.reset();
+}
+
+var i = pillarCount;
+while( i-- ) {
+  //柱子
+var pillar = pillars[ i ];
+if( distance( this, pillar ) < this.radius + pillar.renderRadius ) {
+  this.vx = 0;
+  this.vy = 0;
+  this.vx += -( pillar.x - this.x ) * rand( 0.01, 0.03 );
+  this.vy += -( pillar.y - this.y ) * rand( 0.01, 0.03 );
+  pillar.radius -= 0.1;
+  this.hit = 1;
+}
+}
+};
+//粒子
+
+Particle.prototype.draw = function() {
+ctx.beginPath();
+ctx.moveTo( this.x, ~~this.y );
+for( var i = 0, length = this.path.length; i < length; i++ ) {
+var point = this.path[ i ];
+ctx.lineTo( point[ 0 ], ~~point[ 1 ] );
+}
+ctx.strokeStyle = 'hsla(' + rand( hue + ( this.x / 3 ), hue + ( this.x / 3 ) + hueRange ) + ', 50%, 30%, 0.3)';
+ctx.stroke();
+
+if( this.hit ) {
+ctx.beginPath();
+ctx.arc( this.x, this.y , rand( 1, 25 ), 0, TWO_PI );
+ctx.fillStyle = 'hsla(' + rand( hue + ( this.x / 3 ), hue + ( this.x / 3 ) + hueRange ) + ', 80%, 15%, 0.1)'
+ctx.fill();
+}
+};
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Pillar
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function Pillar() {
+this.reset();
+}
+
+Pillar.prototype.reset = function(){
+// this.radius = rand( 50, 100 );
+// this.renderRadius = 0;
+// this.x = rand( 0, w );
+// this.y = rand( h / 2 - h / 4, h );
+// this.active = 0;
+};
+
+Pillar.prototype.step = function() {
+if( this.active ) {
+if( this.radius <= 1 ) {
+  this.reset();
+} else {
+  this.renderRadius = this.radius;
+}
+} else {
+if( this.renderRadius < this.radius ) {
+  this.renderRadius += 0.5;
+} else {
+  this.active = 1;
+}
+}
+};
+
+//Pillar.prototype.draw = function() {
+//ctx.beginPath();
+//ctx.arc( this.x, this.y, this.renderRadius, 0, TWO_PI, false );
+// ctx.fill();
+//};
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Init
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function init() {
+ctx.lineWidth = lineWidth;
+ctx.lineCap = lineCap;
+
+var i = pillarCount;
+while( i-- ){
+pillars.push( new Pillar() );
+}
+
+document.body.appendChild( c );
+loop();
+}
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Step
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function step() {
+hue += hueChange;
+
+if( particles.length < particleCount ) {
+particles.push( new Particle() );
+}
+
+var i = particles.length;
+while( i-- ) {
+particles[ i ].step();
+}
+
+i = pillarCount;
+while( i-- ) {
+pillars[ i ].step();
+}
+}
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Draw
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function draw() {
+// ctx.fillStyle = 'hsla(0, 0%, 0%, 0.1)';
+ctx.fillStyle = 'hsla(0, 0%, 0%, 0.1)';
+ctx.fillRect( 0, 0, w, h );
+
+ctx.globalCompositeOperation = 'lighter';
+var i = particles.length;
+while( i-- ) {
+particles[ i ].draw();
+}
+
+ctx.globalCompositeOperation = 'source-over';
+i = pillarCount;
+ctx.fillStyle = 'rgba(20, 20, 20, 0.3)';
+// while( i-- ) {
+//   pillars[ i ].draw();
+// }
+}
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Loop
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+function loop() {
+requestAnimationFrame( loop );
+step();
+draw();
+}
+
+/*/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+Blast Off
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
+
+init();
 };
