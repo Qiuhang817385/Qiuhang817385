@@ -167,7 +167,7 @@ while( i-- ){
 pillars.push( new Pillar() );
 }
 
-document.body.appendChild( c );
+
 loop();
 }
 
