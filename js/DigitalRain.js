@@ -5,7 +5,7 @@ Vars
 
 =/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=*/
 
-var c = document.getElementById("canvas"),
+var c = document.getElementById("canvass"),
 // var c = document.createElement( 'canvas' ),
 ctx = c.getContext( '2d' ),
  s = window.screen,
