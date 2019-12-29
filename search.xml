@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Git---Shallow update not allowed</title>
+      <link href="/2019/12/29/Git-Shallow-update-not-allowed/"/>
+      <url>/2019/12/29/Git-Shallow-update-not-allowed/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="shallow-update-not-allowed"><a href="#shallow-update-not-allowed" class="headerlink" title="shallow update not allowed"></a>shallow update not allowed</h1><p>! [remote rejected] master -&gt; master (shallow update not allowed)</p><p>As it seems you have used git clone –depth <number> to clone your local version. This results in a shallow clone. One limitation of such a clone is that you can’t push from it into a new repository.</p><p>You now have two options:<br>    1. if you don’t care about you’re current or missing history, take a look at this question<br>    2. if you want to keep your full history, then continue reading:</p><p>So, you want to keep your history, eh? This means that you have to unshallow your repository. To do so you will need to add your old remote again.</p><pre><code>`git remote add old &lt;path-to-old-remote&gt;`</code></pre><p>After that we use git fetch to fetch the remaining history from the old remote (as suggested in this answer).</p><pre><code>`git fetch --unshallow old`</code></pre><p>And now you should be able to push into your new remote repository.</p><p>Note: After unshallowing your clone you can obviously remove the old remote again.</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>宽谣</title>
       <link href="/2019/12/22/%E5%AE%BD%E8%B0%A3/"/>
       <url>/2019/12/22/%E5%AE%BD%E8%B0%A3/</url>
